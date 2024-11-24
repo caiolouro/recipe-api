@@ -7,7 +7,7 @@ COPY ./requirements.txt /tmp/requirements.txt
 COPY ./app /app
 WORKDIR /app
 
-# Informs Docker the container will listen on a port, but doesn't actually publish the port
+# Informs Docker that the container will listen on a port (doesn't actually publish the port)
 EXPOSE 8000
 
 # Runs several commands without creating a new image layer ("&& \"" suffix)
