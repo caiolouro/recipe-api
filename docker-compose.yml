@@ -7,6 +7,6 @@ services:
     ports:
       - "8000:8000" # Maps local port 8000 to container port 8000
     volumes:
-      - ./app:/app # Sync the code locally with the container
+      - ./app:/app # Two-way sync the local code with the container
     command: > # Default command, can be overridden by "docker compose run" command
       sh -c "python manage.py runserver 0.0.0.0:8000"
