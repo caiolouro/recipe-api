@@ -9,7 +9,9 @@ services:
     volumes:
       - ./app:/app # Two-way sync the local code with the container
     command: > # Default command, can be overridden by "docker compose run" command
-      sh -c "python manage.py runserver 0.0.0.0:8000"
+      sh -c "python manage.py wait_for_db &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
     environment:
       - DB_HOST=db # We can use the service name because Docker Compose creates a network for us
       - DB_NAME=app
