@@ -14,7 +14,7 @@ services:
       - DB_HOST=db # We can use the service name because Docker Compose creates a network for us
       - DB_NAME=app
       - DB_USER=app
-      - DB_PASS=somepassword
+      - DB_PASSWORD=somepassword
     depends_on:
       - db
   
