@@ -10,3 +10,22 @@ services:
       - ./app:/app # Two-way sync the local code with the container
     command: > # Default command, can be overridden by "docker compose run" command
       sh -c "python manage.py runserver 0.0.0.0:8000"
+    environment:
+      - DB_HOST=db # We can use the service name because Docker Compose creates a network for us
+      - DB_NAME=app
+      - DB_USER=app
+      - DB_PASS=somepassword
+    depends_on:
+      - db
+  
+  db:
+    image: postgres:13-alpine
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    environment:
+      - POSTGRES_DB=app
+      - POSTGRES_USER=app
+      - POSTGRES_PASSWORD=somepassword
+  
+volumes:
+  db-data: # No details because Docker Compose will manage it
