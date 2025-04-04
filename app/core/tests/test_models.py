@@ -14,3 +14,15 @@ class ModelTests(TestCase):
 
         self.assertEqual(user.email, email)
         self.assertTrue(user.check_password(password))
+
+    def test_when_user_has_denormalized_email(self):
+        emails = [
+            ['test1@EXAMPLE.com', 'test1@example.com'],
+            ['Test2@Example.com', 'Test2@example.com'],
+            ['TEST3@EXAMPLE.COM', 'TEST3@example.com'],
+            ['test4@example.COM', 'test4@example.com']
+        ]
+
+        for input_email, expected_email in emails:
+            user = get_user_model().objects.create_user(email=input_email, password='testpassword')
+            self.assertEqual(user.email, expected_email)
